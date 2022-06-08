@@ -1,0 +1,41 @@
+﻿@using u21653268_HW03.Models
+@model List<FileModel>
+@{
+    ViewBag.Title = "Files";
+}
+<br/>
+<h1>Your Documents</h1>
+<br />
+<h3>Documents of any file type</h3>
+<br />
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>File Name</th>
+            <th>Download File</th>
+            <th>Delete File</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(FileModel file in Model)
+        {
+            <tr>
+                <td>@file.FileName</td>
+                <td>
+                    <button class="btn btn-outline-success">
+                        @Html.ActionLink("Download", "DownloadFile",
+                         new { fileName = file.FileName })
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-outline-danger">
+                        @Html.ActionLink("Delete", "DeleteFile",
+                       new { fileName = file.FileName },
+                       new { onclick = "return confirm('Are you sure you want to delete this file?');" })
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

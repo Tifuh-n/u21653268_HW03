@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+
+<br />
+<h1>MediaMaster</h1>
+<h3>@ViewBag.Message</h3>
+<br/>
+<div class="row bg-light">
+    <div class="col-sm-8">
+        <h3>Description</h3>
+        <p>MediaMaster is an easy to use media uploader and viewer.</p>
+        <p>Upload yor videos, images and/or documents and view them online. To upload a file select the file type on the right side of the description and choose the file from from your computer to upload. Click the submit button to submit your file and then you are done. You can now view your files on their respective pages.</p>
+    </div>
+    <div class="col-sm-4">
+        <h3>Option Selection</h3>
+        @using (Html.BeginForm("Home", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div>
+                <input type="radio" id="document" name="FileType" value="Document" class="form-check-input" />
+                <label for="document" class="form-check-label">Document</label><br />
+                <input type="radio" id="image" name="FileType" value="Image" class="form-check-input" />
+                <label for="image" class="form-check-label">Image</label><br />
+                <input type="radio" id="video" name="FileType" value="Video" class="form-check-input" />
+                <label for="video" class="form-check-label">Video</label><br />
+                <input type="file" id="file" name="File" class="mt-1"/>
+                <input type="submit" value="Upload" class="btn btn-outline-success mt-1" />
+            </div>
+        }
+    </div>
+</div>

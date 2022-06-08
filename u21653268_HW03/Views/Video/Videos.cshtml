@@ -1,0 +1,63 @@
+﻿@using u21653268_HW03.Models
+@{
+    ViewBag.Title = "Videos";
+}
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.mousewheel-3.0.6.pack.js"></script>
+<script src="~/Scripts/jquery.fancybox.js?v=2.1.5"></script>
+<link href="~/Content/jquery.fancybox.css?v=2.1.2" rel="stylesheet" media="screen" />
+<link href="~/Scripts/jquery.fancybox.css" rel="stylesheet" />
+
+
+<br />
+<h1>Videos</h1>
+<br />
+<h3>Videos of any file type</h3>
+<br />
+
+
+<div class="row row-cols-1 row-cols-md-3">
+    @foreach (FileModel file in Model)
+    {
+        <div class="col mb-3 gallery">
+
+            <a rel="group" href="~/Media/Videos/@file.FileName" class="fancybox" data-type="iframe">
+                <video height="200">
+                    <source src="~/Media/Videos/@file.FileName" type="video/mp4" />
+                    <source src="~/Media/Videos/@file.FileName" type="video/ogg" />
+                    Your browser does not support the video tag.
+                </video>
+            </a>
+            <div>
+                <h6>@file.FileName</h6>
+                <button class="btn btn-outline-success text-decoration-none">
+                    @Html.ActionLink("Download", "DownloadVideo",
+                        new { fileName = file.FileName })
+                </button>
+                <button class="btn btn-outline-danger" type="button" >
+                    @Html.ActionLink("Delete", "DeleteVideo",
+                        new { fileName = file.FileName },
+                        new { onclick = "return confirm('Are you sure you want to delete this video?');" })
+                </button>
+            </div>
+
+        </div>
+
+    }
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        $(".fancybox").fancybox({
+            helpers: { media: true },
+            type: 'iframe',
+            maxWidth: 800,
+            maxHeight: 600,
+            fitToView: false,
+            width: '70%',
+            height: '70%',
+            autoSize: false
+        });
+    });
+</script>
